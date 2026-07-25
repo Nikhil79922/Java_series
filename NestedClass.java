@@ -2,11 +2,12 @@
 public class NestedClass {
 
     public static void main(String[] args) {
+        //Type 1 :- Static Nested class.
         Outter outter = new Outter();
         Outter.Inner inner = new Outter.Inner(outter);
         inner.fun();
 
-        //Type 2
+        //Type 2 :- Inner class 
         InnerNestedClass innerNested = new InnerNestedClass();
         InnerNestedClass.innerClass insideClass = innerNested.new innerClass();
         insideClass.fun();
@@ -14,6 +15,25 @@ public class NestedClass {
         InnerNestedClass.innerClass insideClass1 = new InnerNestedClass().new innerClass();
 
         insideClass1.fun();
+
+        //Type 3 :- local class 
+        ThirdType t3 = new ThirdType();
+        t3.checkLocal();
+
+        //Type 4 :- Anonynous class
+        Person p1 = new Person() {
+            @Override
+            void introduce() {
+                greet();
+                System.out.println("Hi am a Nikhil");
+            }
+
+            void greet() {
+                System.out.println("Hi");
+            }
+        };
+
+        p1.introduce();
     }
 }
 
@@ -87,6 +107,59 @@ class InnerNestedClass {
             System.out.println(InnerNestedClass.this.x);
             System.out.println("Hello");
         }
+
     }
 
 }
+
+//Type - 3
+class ThirdType {
+
+    Object localValue() {
+        final int y = 0;
+
+        class Local {
+
+            void fun() {
+                System.out.println(y);
+            }
+        }
+
+        Local l = new Local();
+        l.fun();
+        System.out.println(l);
+        return l;
+    }
+
+    void checkLocal() {
+        Object local2 = localValue();
+    }
+
+}
+
+// Type 4 = anonymous class 
+class Person {
+
+    void introduce() {
+        System.out.println("Hi am a Person");
+    }
+}
+
+class Greet extends Person {
+
+    @Override
+    void introduce() {
+        System.out.println("Hi am a Nikhil");
+    }
+}
+
+
+
+
+/*
+Use cases precedences
+1) Static nested class 
+2) Inner class 
+3) Anonymous class --> now replace by ---> Lambda expressions
+4) Local class :- very rarely used. 
+*/
