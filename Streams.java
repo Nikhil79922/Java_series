@@ -120,13 +120,13 @@ public class Streams {
 
         Map<Integer, Integer> frequency = arr.stream()
                 .collect(Collectors.toMap(
-                        x -> x, // key
-                        x -> 1, // every occurrence starts with count 1
+                        x -> x, // key   Map Key 
+                        x -> 1, // every occurrence starts with count 1 ;;; Map Value
                         Integer::sum // merge duplicate keys
                 ));
 
         Map<Integer, List<Integer>> group = arr.stream()
-                .collect(Collectors.groupingBy(x -> x));
+                .collect(Collectors.groupingBy(x -> x)); // group based on ?
 
         Map<Boolean, List<Integer>> partitionBy = arr.stream()
                 .collect(Collectors.partitioningBy(x -> x % 2 == 0));
